@@ -11,28 +11,30 @@ def go_with_velocity(velocity_x,velocity_y,velocity_z,duration):
         time.sleep(1)
 
 
-vehicle = connect('127.0.0.1:14550',wait_ready=True)
+vehicle = connect('localhost:14550',wait_ready=True)
 print("connected")
 
 
 vehicle.mode = VehicleMode("GUIDED")
-
 while not vehicle.mode == "GUIDED":
     print("Wait for change mode")
     time.sleep(1)
+print("mode: GUIDED")
 
 vehicle.armed = True
 while not vehicle.is_armable:
     print("Wait for arm")
     time.sleep(1)
-
+print("Armed!")
 
 
 try:
+    print("takeoff")
     vehicle.wait_simple_takeoff(10,0.5,10)
 except TimeoutError as e:
     print(e)
 
+print("go square")
 go_with_velocity(1,0,0,5)
 go_with_velocity(0,1,0,5)
 go_with_velocity(1,0,0,5)
