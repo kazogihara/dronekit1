@@ -13,6 +13,7 @@ def rtl():
     while not vehicle.mode == "RTL":
         print("Wait for change mode")
         time.sleep(1)
+    vehicle.close()
     return SUCCESS_CODE
 
 app.run(port=8000, debug=True)
